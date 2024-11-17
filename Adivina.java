@@ -26,6 +26,8 @@ import java.util.*;
    
        public static void main(String[] args) {
          
+         Scanner leerTeclado = new Scanner(System.in);
+
          intro();
          jugarPartida();
          mostrarEstadisticas();
@@ -41,7 +43,7 @@ import java.util.*;
          System.out.println();
        }
        
-      public static void  jugarPartida() {
+      public static void  jugarPartida(Scanner leerTeclado) {
          
          
          System.out.println("Adivina un número del 1 al 100");
