@@ -2,17 +2,17 @@
  *                                                                                                                *
  *                                       *** PROGRAMA EN JAVA ***                                                 *
  *                                                                                                                *
- *   Nombre del archivo : Adivina.java                                                                          *
+ *   Nombre del archivo : Adivina.java                                                                            *
  *   Autor              : Javier Unibaso Bilbao                                                                   *
- *   Fecha              : 17/11/2024                                                                              *
+ *   Fecha              : 18/11/2024                                                                              *
  *   Módulo             : Programación.                                                                           *
  *   Unidad Didáctica   : UD3 Estructuras de control.                                                             *
- *   Tarea              : Tarea Práctica 01.                                                                      *
+ *   Tarea              : Tarea de evaluación 01. Realiza un programa en Java (100%)                              *
  *                                                                                                                *
  * ----------------------------------------------------------------------------------------------------------------
  *   Descripción del programa:                                                                                    *
- *   - Calcular la nota media de un estudiante a partir de la calificación del examen parcial,                    *
- *     el examen final y las Unidades Didácticas realizadas durante el curso.                                     *
+ *   - un programa que genere un número al azar del 1 al 100 (entero) y que dé pistas (mayor o menor)             *
+ *     para que el usuario o usuaria lo adivine.                                                                  *
  * ----------------------------------------------------------------------------------------------------------------
  *   Enlace a la autoevaluación:                                                                                  *
  *   - https://drive.google.com/file/d/1AZDYmrDhEDCkcXDfIzbpbmqJ8rEBQW2W/view?usp=sharing                         *
@@ -23,16 +23,19 @@ import java.util.*;
 
    public class Adivina{
    
-   
+      private static final int MAX_NUM = 100;
+    
        public static void main(String[] args) {
          
          Scanner leerTeclado = new Scanner(System.in);
          
          final int partidasGanadas = 0;
-
+        
+         
          intro();
          jugarPartida(leerTeclado, partidasGanadas);
-         
+         leerTeclado.close();
+
        
        }
 
@@ -48,7 +51,7 @@ import java.util.*;
        
       public static void jugarPartida(Scanner leerTeclado, int partidasGanadas) {
          Random rand = new Random(20);
-         int num = rand.nextInt(100) + 1;
+         int num = rand.nextInt(MAX_NUM) + 1;
          int numAdiv = 0;
          int partidasJugadas = 0;
          int intentosTotal = 0;
@@ -96,19 +99,24 @@ import java.util.*;
                   }    
                   partidasJugadas++ ;
                             
-         System.out.print("¿Quieres jugar otra vez (S/N)? ");
-         String respuesta = leerTeclado.next().trim();
-         System.out.println();
-            if (!respuesta.toLowerCase().startsWith("s")) {
-                jugarOtra = false;
-             }
+              jugarOtra = otraPartida(leerTeclado);
           
          }while (jugarOtra == true);
          
          mostrarEstadisticas(partidasJugadas, intentosTotal, partidasGanadas, mejorPartida);
       }
       
-      
+         public static boolean otraPartida(Scanner leerTeclado){
+         
+            boolean jugarOtra = true;
+            System.out.print("¿Quieres jugar otra vez (S/N)? ");
+            String respuesta = leerTeclado.next().trim();
+            System.out.println();
+               if (!respuesta.toLowerCase().startsWith("s")) {
+               jugarOtra = false;
+                }
+            return jugarOtra;
+         }      
          
 
          public static void  mostrarEstadisticas(int partidasJugadas, int intentosTotal, int partidasGanadas, int mejorPartida) {
